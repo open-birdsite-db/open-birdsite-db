@@ -975,6 +975,7 @@ export type Database = {
         Row: {
           account_id: string
           archive_upload_id: number
+          conversation_id: string | null
           created_at: string
           favorite_count: number
           fts: unknown | null
@@ -988,6 +989,7 @@ export type Database = {
         Insert: {
           account_id: string
           archive_upload_id: number
+          conversation_id?: string | null
           created_at: string
           favorite_count: number
           fts?: unknown | null
@@ -1001,6 +1003,7 @@ export type Database = {
         Update: {
           account_id?: string
           archive_upload_id?: number
+          conversation_id?: string | null
           created_at?: string
           favorite_count?: number
           fts?: unknown | null
@@ -1094,6 +1097,19 @@ export type Database = {
           total_likes: number | null
           total_tweets: number | null
           total_user_mentions: number | null
+        }
+        Relationships: []
+      }
+      main_thread_view: {
+        Row: {
+          account_id: string | null
+          conversation_id: string | null
+          depth: number | null
+          favorite_count: number | null
+          max_depth: number | null
+          reply_to_tweet_id: string | null
+          retweet_count: number | null
+          tweet_id: string | null
         }
         Relationships: []
       }
@@ -1436,6 +1452,10 @@ export type Database = {
           avatar_media_url: string
         }[]
       }
+      post_upload_update_conversation_ids: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       process_and_insert_tweet_entities: {
         Args: {
           p_tweets: Json
@@ -1487,6 +1507,10 @@ export type Database = {
           "": string
         }
         Returns: string[]
+      }
+      update_conversation_ids: {
+        Args: Record<PropertyKey, never>
+        Returns: number
       }
     }
     Enums: {
